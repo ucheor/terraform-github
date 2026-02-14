@@ -77,9 +77,17 @@ jobs:
         working-directory: ./keypair
         run: terraform plan -out=tfplan
 
-      - name: Upload Plan Artifact
+      # NEW STEP: Convert binary plan to human-readable text
+      - name: Create Readable Plan Preview
+        working-directory: ./keypair
+        run: terraform show -no-color tfplan > plan_preview.txt
+
+      # Upload both the binary (for the machine) and text (for you)
+      - name: Upload Plan Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: terraform-plan
-          path: ./keypair/tfplan
+          path: |
+            ./keypair/tfplan
+            ./keypair/plan_preview.txt
           retention-days: 5
