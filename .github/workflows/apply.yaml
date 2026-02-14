@@ -24,4 +24,6 @@ jobs:
       - uses: hashicorp/setup-terraform@v3
 
       - run: terraform init
+        working-directory: ./keypair
       - run: terraform apply -auto-approve
+        working-directory: ./keypair
