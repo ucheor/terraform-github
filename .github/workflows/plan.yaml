@@ -76,3 +76,10 @@ jobs:
       - name: Terraform Plan
         working-directory: ./keypair
         run: terraform plan -out=tfplan
+
+      - name: Upload Plan Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-plan
+          path: ./keypair/tfplan
+          retention-days: 5

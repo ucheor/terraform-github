@@ -27,3 +27,11 @@ jobs:
         working-directory: ./keypair
       - run: terraform apply -auto-approve
         working-directory: ./keypair
+
+      - name: Upload Private Key
+        uses: actions/upload-artifact@v4
+        with:
+          name: private-key
+          # Terraform creates the file in the working-directoryJ
+          path: ./keypair/*.pem
+          retention-days: 1
